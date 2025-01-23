@@ -5,25 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Storage System</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>My Drive</h1>
+        <h1>File Storage System</h1>
+        <nav>
+            <button id="addFileBtn">Add File</button>
+        </nav>
     </header>
     <main>
-        <section id="file-upload">
-            <h2>Upload Files</h2>
-            <input type="file" id="file-input" multiple>
-            <button id="upload-btn">Upload</button>
-        </section>
-        <section id="file-list">
-            <h2>Your Files</h2>
-            <div id="files-container"></div>
+        <section id="fileContainer" role="grid">
+            <!-- Files will be dynamically added here -->
         </section>
     </main>
     <footer>
-        <p>&copy; 2023 My Drive. All rights reserved.</p>
+        <p>&copy; 2023 File Storage System</p>
     </footer>
-    <script src="script.js"></script>
+
+    <div id="fileInputModal" role="dialog" aria-labelledby="fileInputModalLabel" aria-hidden="true">
+        <h2 id="fileInputModalLabel">Upload a File</h2>
+        <input type="file" id="fileInput" accept=".html, .css, .js, .apk, .zip" />
+        <button id="uploadFileBtn">Upload</button>
+        <button id="closeModalBtn">Close</button>
+    </div>
 </body>
 </html>
