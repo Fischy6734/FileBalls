@@ -1,47 +1,65 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const fileContainer = document.getElementById('fileContainer');
-    const addFileBtn = document.getElementById('addFileBtn');
+const fileInput = document.getElementById('file-input');
+const uploadButton = document.getElementById('upload-btn');
+const filesContainer = document.getElementById('files-container');
 
-    // Load files from local storage
-    const loadFiles = () => {
-        const files = JSON.parse(localStorage.getItem('files')) || [];
-        files.forEach(file => createFileElement(file.name, file.link));
-    };
+// Load files from localStorage on page load
+document.addEventListener('DOMContentLoaded', loadFiles);
 
-    // Create file element
-    const createFileElement = (name, link) => {
-        const fileDiv = document.createElement('div');
-        fileDiv.className = 'file';
-        fileDiv.innerHTML = `
-            <div class="file-name">${name}</div>
-            <div class="copy-link" data-link="${link}">Copy Link</div>
-        `;
-        fileContainer.appendChild(fileDiv);
-
-        // Add event listener for copying link
-        fileDiv.querySelector('.copy-link').addEventListener('click', () => {
-            navigator.clipboard.writeText(link).then(() => {
-                alert('Link copied to clipboard!');
-            });
-        });
-    };
-
-    // Add file button click event
-    addFileBtn.addEventListener('click', () => {
-        const fileName = prompt('Enter file name:');
-        const shortLink = `https://short.link/${btoa(fileName)}`; // Example short link generation
-        if (fileName) {
-            createFileElement(fileName, shortLink);
-            saveFile(fileName, shortLink);
+uploadButton.addEventListener('click', () => {
+    const files = fileInput.files;
+    if (files.length > 0) {
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            saveFile(file);
         }
-    });
+        fileInput.value = ''; // Clear input
+    }
+});
 
-    // Save file to local storage
-    const saveFile = (name, link) => {
-        const files = JSON.parse(localStorage.getItem('files')) || [];
-        files.push({ name, link });
-        localStorage.setItem('files', JSON.stringify(files));
+function saveFile(file) {
+    const fileData = {
+        name: file.name,
+        type: file.type,
+        size: file.size,
+        lastModified: file.lastModified,
+        url: URL.createObjectURL(file)
     };
 
-    loadFiles();
-});
+    // Save to localStorage
+    const files = JSON.parse(localStorage.getItem('files')) || [];
+    files.push(fileData);
+    localStorage.setItem('files', JSON.stringify(files));
+
+    renderFile(fileData);
+}
+
+function loadFiles() {
+    const files = JSON.parse(localStorage.getItem('files')) || [];
+    files.forEach(file => renderFile(file));
+}
+
+function renderFile(file) {
+    const fileItem = document.createElement('div');
+    fileItem.className = 'file-item';
+    fileItem.innerHTML = `
+        <p>${file.name}</p>
+        <button onclick="downloadFile('${file.url}', '${file.name}')">Download</button>
+        <button onclick="copyLink('${file.url}')">Copy Link</button>
+    `;
+    filesContainer.appendChild(fileItem);
+}
+
+function downloadFile(url, name) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+function copyLink(url) {
+    navigator.clipboard.writeText(url)
+        .then(() => alert('Link copied to clipboard!'))
+        .catch(err => console.error('Error copying link: ', err));
+}
