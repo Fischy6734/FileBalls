@@ -1,50 +1,63 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 0;
     background-color: #f4f4f4;
 }
 
 header {
-    background: #007bff;
+    background: #007BFF;
     color: white;
-    padding: 10px 0;
+    padding: 1rem;
     text-align: center;
 }
 
-h1, h2 {
-    margin: 0;
+nav {
+    margin-top: 10px;
 }
 
-#file-upload {
-    margin-bottom: 20px;
+#fileContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    padding: 20px;
 }
 
-#file-list {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.file-item {
+.file {
     background: white;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100px;
-    height: 100px;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    border-radius: 8px;
+    padding: 10px;
     text-align: center;
+    position: relative;
 }
 
-.file-item button {
-    margin-top: 5px;
+.file button {
+    margin-top: 10px;
 }
 
 footer {
     text-align: center;
-    margin-top: 20px;
+    padding: 20px;
+    background: #007BFF;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+#fileInputModal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+#fileInputModal[aria-hidden="false"] {
+    display: block;
 }
