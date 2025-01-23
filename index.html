@@ -5,29 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Storage System</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
         <h1>File Storage System</h1>
-        <nav>
-            <button id="addFileBtn">Add File</button>
-        </nav>
+        <button id="createFileBtn">Create New File</button>
     </header>
     <main>
-        <section id="fileContainer" role="grid">
+        <section id="fileContainer" aria-label="Stored Files">
             <!-- Files will be dynamically added here -->
         </section>
     </main>
-    <footer>
-        <p>&copy; 2023 File Storage System</p>
-    </footer>
-
-    <div id="fileInputModal" role="dialog" aria-labelledby="fileInputModalLabel" aria-hidden="true">
-        <h2 id="fileInputModalLabel">Upload a File</h2>
-        <input type="file" id="fileInput" accept=".html, .css, .js, .apk, .zip" />
-        <button id="uploadFileBtn">Upload</button>
-        <button id="closeModalBtn">Close</button>
-    </div>
+    <template id="fileTemplate">
+        <div class="file">
+            <textarea class="file-content" placeholder="Edit your file here..."></textarea>
+            <button class="downloadBtn">Download</button>
+            <button class="copyLinkBtn">Copy Link</button>
+        </div>
+    </template>
+    <script src="script.js"></script>
 </body>
 </html>
