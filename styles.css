@@ -1,63 +1,58 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 20px;
     background-color: #f4f4f4;
 }
 
 header {
-    background: #007BFF;
-    color: white;
-    padding: 1rem;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-nav {
-    margin-top: 10px;
+h1 {
+    font-size: 24px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
 
 #fileContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
-    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .file {
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     padding: 10px;
-    text-align: center;
-    position: relative;
+    width: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.file button {
-    margin-top: 10px;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #007BFF;
-    color: white;
-    position: relative;
-    bottom: 0;
+.file-content {
     width: 100%;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    resize: none;
 }
 
-#fileInputModal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    z-index: 1000;
-}
-
-#fileInputModal[aria-hidden="false"] {
-    display: block;
+.downloadBtn, .copyLinkBtn {
+    margin-top: 10px;
 }
