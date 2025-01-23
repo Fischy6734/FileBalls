@@ -11,60 +11,57 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #000;
+            background-color: #121212;
             overflow: hidden;
-            filter: blur(5px);
-            transition: filter 0.5s ease;
+            font-family: Arial, sans-serif;
         }
 
         .overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.8);
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 10;
+            z-index: 1;
         }
 
-        .message {
-            background-color: #fff;
-            color: #000;
+        .message-box {
+            background-color: #ffffff;
+            color: #000000;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 8px;
             text-align: center;
-            font-size: 24px;
-            animation: popIn 0.5s forwards;
-            filter: none; /* Unblur the rectangle and text */
+            font-size: 1.5em;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: pop-in 0.5s forwards;
+            z-index: 2;
         }
 
-        @keyframes popIn {
-            from {
-                transform: scale(0);
-                opacity: 0;
-            }
+        @keyframes pop-in {
             to {
-                transform: scale(1);
                 opacity: 1;
+                transform: scale(1);
             }
         }
     </style>
 </head>
 <body>
-    <div class="overlay" id="overlay">
-        <div class="message">
+    <div class="overlay">
+        <div class="message-box">
             This site is down, please come back later.
         </div>
     </div>
 
     <script>
-        // Wait for 0.5 seconds before showing the overlay
+        // Delay the appearance of the message box
         setTimeout(() => {
-            document.body.style.filter = 'blur(5px)';
-            document.getElementById('overlay').style.display = 'flex';
+            document.querySelector('.message-box').style.opacity = '1';
         }, 500);
     </script>
 </body>
